@@ -28,7 +28,7 @@ const providers = getProvidersByTrade(trade.name);
   <div class="container py-6 md:py-8 space-y-8">
     <!-- Trade Hero -->
     <section class="rounded-xl p-6 md:p-8 text-center relative overflow-hidden" style={`background: linear-gradient(135deg, ${trade.color}15, white)`}>
-      <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={`background: ${trade.color}18`}>
+      <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={`background: color-mix(in srgb, ${trade.color} 9%, transparent)`}>
         <span class="material-symbols-rounded text-[32px]" style={`color: ${trade.color}`} aria-hidden="true">{trade.icon}</span>
       </div>
       <h1 class="text-h1 md:text-[32px] text-[var(--color-text-primary)] mb-2 tracking-tight font-extrabold">

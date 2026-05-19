@@ -37,7 +37,7 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
         {rank && (
           <span class="bg-[var(--color-primary)] text-[var(--color-text-inverse)] rounded-pill px-2 py-0.5 text-[11px] font-bold tracking-wider">#{rank}</span>
         )}
-        <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={`background: ${tradeColor}18`}>
+        <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={`background: color-mix(in srgb, ${tradeColor} 9%, transparent)`}>
           <span class="material-symbols-rounded text-xl" style={`color: ${tradeColor}`} aria-hidden="true">{tradeIcon}</span>
         </div>
         <div class="flex-1 min-w-0">

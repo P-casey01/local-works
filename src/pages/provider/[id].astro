@@ -25,9 +25,20 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
   noindex={!provider.verified}
 >
   <div class="container py-6 md:py-8 max-w-[800px] mx-auto space-y-4">
+    <!-- Breadcrumbs -->
+    <nav aria-label="Breadcrumb" class="mb-2">
+      <ol class="flex items-center gap-2 text-[13px] text-[var(--color-text-tertiary)]">
+        <li><a href="/" class="hover:text-[var(--color-primary)] transition-colors">Home</a></li>
+        <li aria-hidden="true">/</li>
+        <li><a href={`/trades/${tradeInfo?.slug || ''}`} class="hover:text-[var(--color-primary)] transition-colors">{provider.trade}s</a></li>
+        <li aria-hidden="true">/</li>
+        <li class="text-[var(--color-text-primary)] font-semibold" aria-current="page">{provider.name}</li>
+      </ol>
+    </nav>
+
     <!-- Header -->
     <div class="text-center py-6">
-      <div class="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center" style={`background: ${tradeColor}18`}>
+      <div class="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center" style={`background: color-mix(in srgb, ${tradeColor} 9%, transparent)`}>
         <span class="material-symbols-rounded text-[40px]" style={`color: ${tradeColor}`} aria-hidden="true">{tradeIcon}</span>
       </div>
       <h1 class="text-h1 text-[var(--color-text-primary)] tracking-tight">{provider.name}</h1>

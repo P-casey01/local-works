@@ -12,7 +12,8 @@ import Button from '../atoms/Button.astro';
   <p class="text-body text-[#BFDBFE] mb-5 max-w-[90%] mx-auto leading-relaxed">
     Tell our chatbot what you need — we'll match you with vetted local professionals
   </p>
-  <Button href="/chat" variant="primary" size="lg" class="bg-white text-[var(--color-primary)] hover:bg-gray-100 shadow-[var(--shadow-primary)]" icon="💬">
+  <a href="/chat" class="inline-flex items-center justify-center gap-2 font-semibold rounded-button transition-all duration-200 focus-visible:ring-2 focus-visible:ring-[var(--color-primary-light)] focus-visible:ring-offset-2 active:scale-[0.97] bg-white text-[var(--color-primary)] hover:bg-gray-100 shadow-[var(--shadow-md)] px-6 py-3.5 text-[15px]">
+    <span class="text-lg" aria-hidden="true">💬</span>
     Start Chat → Find a Pro
-  </Button>
+  </a>
 </section>

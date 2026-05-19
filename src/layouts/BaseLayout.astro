@@ -58,6 +58,7 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
     <!-- JSON-LD: Organization -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -91,10 +92,31 @@ const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
     </main>
 
     <footer role="contentinfo" class="border-t border-[var(--color-border)] mt-16">
-      <div class="container py-8 text-center">
-        <p class="text-[var(--color-text-muted)] text-[13px]">
-          ServiceMatch • Connecting NI with trusted local pros
-        </p>
+      <div class="container py-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div>
+            <p class="text-h4 font-bold text-[var(--color-text-primary)] mb-1">ServiceMatch</p>
+            <p class="text-[13px] text-[var(--color-text-tertiary)] leading-relaxed">Connecting NI with trusted local pros</p>
+          </div>
+          <div>
+            <p class="text-label text-[var(--color-text-muted)] mb-2">Quick Links</p>
+            <ul class="space-y-1.5 text-[13px]">
+              <li><a href="/chat" class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Find a Pro</a></li>
+              <li><a href="/signup" class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Join as a Pro</a></li>
+              <li><a href="/trades/plumber" class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">All Trades</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-label text-[var(--color-text-muted)] mb-2">Legal</p>
+            <ul class="space-y-1.5 text-[13px]">
+              <li><a href="/privacy" class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Privacy Policy</a></li>
+              <li><a href="/terms" class="text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] transition-colors">Terms of Service</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-[var(--color-border)] mt-6 pt-4 text-center">
+          <p class="text-[var(--color-text-muted)] text-[13px]">ServiceMatch • Connecting NI with trusted local pros</p>
+        </div>
       </div>
     </footer>
   </body>
