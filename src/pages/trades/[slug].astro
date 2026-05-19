@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroSection from '../../components/organisms/HeroSection.astro';
+import TrustStatsBar from '../../components/organisms/TrustStatsBar.astro';
+import HowItWorks from '../../components/molecules/HowItWorks.astro';
+import ProviderCard from '../../components/molecules/ProviderCard.astro';
+import ProviderCTA from '../../components/organisms/ProviderCTA.astro';
+import Button from '../../components/atoms/Button.astro';
+import { TRADES, getTradeBySlug } from '../../lib/trades';
+import { getProvidersByTrade } from '../../lib/providers';
+
+export function getStaticPaths() {
+  return TRADES.map(trade => ({
+    params: { slug: trade.slug },
+    props: { trade },
+  }));
+}
+
+const { trade } = Astro.props;
+const providers = getProvidersByTrade(trade.name);
+---
+
+<BaseLayout
+  title={`Find a ${trade.name} in Northern Ireland`}
+  description={trade.description}
+  ogImage={`/og/trades/${trade.slug}.png`}
+>
+  <div class="container py-6 md:py-8 space-y-8">
+    <!-- Trade Hero -->
+    <section class="rounded-xl p-6 md:p-8 text-center relative overflow-hidden" style={`background: linear-gradient(135deg, ${trade.color}15, white)`}>
+      <div class="w-12 h-12 rounded-full mx-auto mb-3 flex items-center justify-center" style={`background: ${trade.color}18`}>
+        <span class="material-symbols-rounded text-[32px]" style={`color: ${trade.color}`} aria-hidden="true">{trade.icon}</span>
+      </div>
+      <h1 class="text-h1 md:text-[32px] text-[var(--color-text-primary)] mb-2 tracking-tight font-extrabold">
+        Find a {trade.name} in Northern Ireland
+      </h1>
+      <p class="text-body text-[var(--color-text-secondary)] mb-5 max-w-[600px] mx-auto leading-relaxed">
+        {trade.description}
+      </p>
+      <Button href={`/chat?trade=${trade.slug}`} variant="primary" size="lg" icon={trade.emoji}>
+        Find a {trade.name} Now →
+      </Button>
+    </section>
+
+    <!-- Trust Stats -->
+    <TrustStatsBar />
+
+    <!-- How It Works -->
+    <section>
+      <h2 class="text-h3 text-[var(--color-text-primary)] mb-3">How It Works</h2>
+      <HowItWorks />
+    </section>
+
+    <!-- Providers -->
+    <section>
+      <h2 class="text-h3 text-[var(--color-text-primary)] mb-3">Our {trade.name}s</h2>
+      {providers.length > 0 ? (
+        <div class="space-y-2">
+          {providers.map((provider, i) => (
+            <ProviderCard {...provider} rank={i + 1} />
+          ))}
+        </div>
+      ) : (
+        <div class="bg-[var(--color-surface)] rounded-lg p-8 text-center shadow-[var(--shadow-sm)]">
+          <p class="text-body text-[var(--color-text-tertiary)] mb-3">No {trade.name}s listed yet.</p>
+          <Button href="/signup" variant="outline">
+            Join as the first {trade.name} on ServiceMatch →
+          </Button>
+        </div>
+      )}
+    </section>
+
+    <!-- Tradesperson CTA -->
+    <ProviderCTA />
+  </div>
+</BaseLayout>

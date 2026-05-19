@@ -1,0 +1,14 @@
+---
+interface Props {
+  value: string;
+  label: string;
+  class?: string;
+}
+
+const { value, label, class: className = '' } = Astro.props;
+---
+
+<div class={`flex-1 bg-[var(--color-surface)] rounded-md py-3 px-2 text-center shadow-[var(--shadow-sm)] ${className}`}>
+  <p class="text-h3 text-[var(--color-primary)] font-semibold">{value}</p>
+  <p class="text-overline text-[var(--color-text-muted)] mt-0.5">{label}</p>
+</div>

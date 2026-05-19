@@ -1,0 +1,101 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Connect with vetted tradespeople in Northern Ireland. Chat with our bot, get matched with verified local professionals.',
+  ogImage = '/og/home.png',
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'ServiceMatch';
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const siteUrl = Astro.site?.origin || 'https://servicematch.co.uk';
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Font preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": siteName,
+      "url": siteUrl,
+      "description": "Connecting Northern Ireland with trusted local tradespeople.",
+      "areaServed": {
+        "@type": "Place",
+        "name": "Northern Ireland"
+      }
+    })} />
+  </head>
+  <body class="min-h-screen bg-[var(--color-background)] text-[var(--color-text-primary)]">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header role="banner" class="bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+      <div class="container flex items-center justify-between py-3">
+        <a href="/" class="text-lg font-bold tracking-tight hover:opacity-90" aria-label="ServiceMatch Home">
+          ServiceMatch
+        </a>
+        <nav aria-label="Main navigation" class="flex items-center gap-4 text-sm font-semibold">
+          <a href="/chat" class="hover:opacity-90 hidden sm:inline">Find a Pro</a>
+          <a href="/signup" class="bg-white/15 hover:bg-white/25 rounded-button px-3 py-1.5 transition-colors">Join as a Pro</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer role="contentinfo" class="border-t border-[var(--color-border)] mt-16">
+      <div class="container py-8 text-center">
+        <p class="text-[var(--color-text-muted)] text-[13px]">
+          ServiceMatch • Connecting NI with trusted local pros
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

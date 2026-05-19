@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/organisms/HeroSection.astro';
+import TrustStatsBar from '../components/organisms/TrustStatsBar.astro';
+import HowItWorks from '../components/molecules/HowItWorks.astro';
+import TradeGrid from '../components/molecules/TradeGrid.astro';
+import ProviderCTA from '../components/organisms/ProviderCTA.astro';
+---
+
+<BaseLayout
+  title="Find Trusted Local Pros in Northern Ireland"
+  description="Connect with vetted tradespeople in NI. Chat with our bot, get matched with verified plumbers, electricians, carpenters and more."
+>
+  <div class="container py-6 space-y-8 md:py-8">
+    <!-- Hero -->
+    <HeroSection />
+
+    <!-- Trust Stats -->
+    <TrustStatsBar />
+
+    <!-- How It Works -->
+    <section>
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-h3 text-[var(--color-text-primary)]">How It Works</h2>
+      </div>
+      <HowItWorks />
+    </section>
+
+    <!-- Popular Trades -->
+    <section>
+      <div class="flex justify-between items-center mb-3">
+        <h2 class="text-h3 text-[var(--color-text-primary)]">Popular Trades</h2>
+        <a href="/chat" class="text-[13px] font-semibold text-[var(--color-primary)] hover:opacity-80">See all →</a>
+      </div>
+      <TradeGrid limit={12} />
+    </section>
+
+    <!-- Tradesperson CTA -->
+    <ProviderCTA />
+  </div>
+</BaseLayout>

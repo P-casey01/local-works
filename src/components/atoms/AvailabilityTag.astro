@@ -1,0 +1,15 @@
+---
+import { AVAILABILITY_LABELS } from '../../lib/trades';
+
+interface Props {
+  availability: string;
+  class?: string;
+}
+
+const { availability, class: className = '' } = Astro.props;
+const avail = AVAILABILITY_LABELS[availability] || { text: availability, color: 'var(--color-text-tertiary)' };
+---
+
+<span class={`text-[13px] font-semibold ${className}`} style={`color: ${avail.color}`}>
+  {avail.text}
+</span>

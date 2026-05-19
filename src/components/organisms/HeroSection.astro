@@ -1,0 +1,18 @@
+---
+import Button from '../atoms/Button.astro';
+---
+
+<section class="bg-[var(--color-primary)] rounded-xl p-6 text-center relative overflow-hidden">
+  <!-- Subtle glow decoration -->
+  <div class="absolute -top-10 -right-10 w-40 h-40 rounded-full bg-white/[0.08]" aria-hidden="true"></div>
+
+  <h1 class="text-h1 md:text-[32px] lg:text-[36px] text-[var(--color-text-inverse)] mb-2 tracking-tight font-extrabold">
+    Find the Right Pro
+  </h1>
+  <p class="text-body text-[#BFDBFE] mb-5 max-w-[90%] mx-auto leading-relaxed">
+    Tell our chatbot what you need — we'll match you with vetted local professionals
+  </p>
+  <Button href="/chat" variant="primary" size="lg" class="bg-white text-[var(--color-primary)] hover:bg-gray-100 shadow-[var(--shadow-primary)]" icon="💬">
+    Start Chat → Find a Pro
+  </Button>
+</section>

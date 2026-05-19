@@ -1,0 +1,98 @@
+---
+import { getTradeInfo } from '../../lib/trades';
+import AvailabilityTag from '../atoms/AvailabilityTag.astro';
+import Badge from '../atoms/Badge.astro';
+
+interface Props {
+  id: string;
+  name: string;
+  trade: string;
+  trades: string[];
+  skills: string[];
+  location: string;
+  radius: number;
+  hourlyRate: number;
+  availability: string;
+  rating: number;
+  reviewCount: number;
+  bio: string;
+  phone: string;
+  email: string;
+  verified: boolean;
+  completedJobs: number;
+  rank?: number;
+}
+
+const { id, name, trade, trades, skills, location, radius, hourlyRate, availability, rating, reviewCount, bio, phone, email, verified, completedJobs, rank } = Astro.props;
+const tradeInfo = getTradeInfo(trade);
+const tradeColor = tradeInfo?.color || 'var(--color-primary)';
+const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
+---
+
+<a href={`/provider/${id}`} class="block group" aria-label={`${name}, ${trades.join(', ')}, £${hourlyRate} per hour, ${rating} stars`}>
+  <article class="bg-[var(--color-surface)] rounded-lg p-4 my-1 mx-0.5 border-l-4 shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-shadow duration-200" style={`border-left-color: ${tradeColor}`}>
+    <!-- Header -->
+    <div class="flex justify-between items-start mb-2">
+      <div class="flex items-center gap-3 flex-1">
+        {rank && (
+          <span class="bg-[var(--color-primary)] text-[var(--color-text-inverse)] rounded-pill px-2 py-0.5 text-[11px] font-bold tracking-wider">#{rank}</span>
+        )}
+        <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0" style={`background: ${tradeColor}18`}>
+          <span class="material-symbols-rounded text-xl" style={`color: ${tradeColor}`} aria-hidden="true">{tradeIcon}</span>
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-1.5">
+            <h3 class="text-h4 text-[var(--color-text-primary)] truncate">{name}</h3>
+            {verified && <Badge variant="success">✓ Verified</Badge>}
+          </div>
+          <div class="flex flex-wrap gap-1 mt-0.5">
+            {trades.map(t => (
+              <span class="bg-[var(--color-info-light)] rounded-pill px-2 py-px text-[11px] font-bold tracking-wider text-[var(--color-primary)]">{t}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+      <div class="text-right shrink-0 ml-2">
+        <p class="text-price text-[var(--color-primary)]">£{hourlyRate}</p>
+        <p class="text-[13px] text-[var(--color-text-tertiary)]">/hr</p>
+      </div>
+    </div>
+
+    <!-- Availability + Location -->
+    <div class="flex justify-between items-center mb-2">
+      <AvailabilityTag availability={availability} />
+      <span class="text-[13px] text-[var(--color-text-tertiary)]">📍 {location} • {radius}mi</span>
+    </div>
+
+    <!-- Bio -->
+    <p class="text-body text-[var(--color-text-secondary)] leading-snug mb-2 line-clamp-2">{bio}</p>
+
+    <!-- Skills -->
+    <div class="flex flex-wrap gap-1.5 mb-3">
+      {skills.slice(0, 4).map(skill => (
+        <span class="bg-[var(--color-surface-variant)] rounded-pill px-2.5 py-0.5 text-[13px] text-[var(--color-text-tertiary)]">{skill}</span>
+      ))}
+    </div>
+
+    <!-- Stats -->
+    <div class="flex justify-between border-t border-[var(--color-border-light)] pt-2 mb-3">
+      <div class="text-center">
+        <p class="text-[13px] font-semibold text-[var(--color-text-primary)]">⭐ {rating}</p>
+        <p class="text-[11px] font-bold tracking-wider text-[var(--color-text-muted)]">{reviewCount} reviews</p>
+      </div>
+      <div class="text-center">
+        <p class="text-[13px] font-semibold text-[var(--color-text-primary)]">✅ {completedJobs}</p>
+        <p class="text-[11px] font-bold tracking-wider text-[var(--color-text-muted)]">jobs done</p>
+      </div>
+      <div class="text-center">
+        <p class="text-[13px] font-semibold text-[var(--color-text-primary)]">£{hourlyRate}/hr</p>
+        <p class="text-[11px] font-bold tracking-wider text-[var(--color-text-muted)]">rate</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="bg-[var(--color-primary)] rounded-button py-3 text-center shadow-[var(--shadow-primary)] group-hover:opacity-90 transition-opacity">
+      <span class="text-[13px] font-semibold text-[var(--color-text-inverse)] tracking-wide">View Profile & Contact →</span>
+    </div>
+  </article>
+</a>
