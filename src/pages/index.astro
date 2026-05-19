@@ -4,7 +4,6 @@ import HeroSection from '../components/organisms/HeroSection.astro';
 import TrustStatsBar from '../components/organisms/TrustStatsBar.astro';
 import HowItWorks from '../components/molecules/HowItWorks.astro';
 import TradeGrid from '../components/molecules/TradeGrid.astro';
-import Testimonials from '../components/organisms/Testimonials.astro';
 import ProviderCTA from '../components/organisms/ProviderCTA.astro';
 ---
 
@@ -27,16 +26,13 @@ import ProviderCTA from '../components/organisms/ProviderCTA.astro';
       <HowItWorks />
     </section>
 
-    <!-- Testimonials -->
-    <Testimonials />
-
     <!-- Popular Trades -->
     <section>
       <div class="flex justify-between items-center mb-3">
         <h2 class="text-h3 text-[var(--color-text-primary)]">Popular Trades</h2>
-        <a href="/trades" class="text-[13px] font-semibold text-[var(--color-primary)] hover:opacity-80">See all →</a>
+        <a href="/chat" class="text-[13px] font-semibold text-[var(--color-primary)] hover:opacity-80">See all →</a>
       </div>
-      <TradeGrid />
+      <TradeGrid limit={12} />
     </section>
 
     <!-- Tradesperson CTA -->

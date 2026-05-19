@@ -14,7 +14,7 @@ const displayTrades = limit ? TRADES.slice(0, limit) : TRADES;
   {displayTrades.map(trade => {
     const article = 'AEIOUaeiou'.includes(trade.name[0]) ? 'an' : 'a';
     return (
-    <a href={`/trades/${trade.slug}`} class="block group" aria-label={`Find ${article} ${trade.name}`}>
+    <a href={`/chat?trade=${trade.slug}`} class="block group" aria-label={`Find ${article} ${trade.name}`}>
       <div class="bg-[var(--color-surface)] rounded-md py-3 px-1 text-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-shadow">
         <div class="w-12 h-12 rounded-full mx-auto mb-1 flex items-center justify-center" style={`background: color-mix(in srgb, ${trade.color} 9%, transparent)`}>
           <span class="material-symbols-rounded text-[28px]" style={`color: ${trade.color}`} aria-hidden="true">{trade.icon}</span>
