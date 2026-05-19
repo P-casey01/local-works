@@ -5,6 +5,7 @@ import TrustStatsBar from '../../components/organisms/TrustStatsBar.astro';
 import HowItWorks from '../../components/molecules/HowItWorks.astro';
 import ProviderCard from '../../components/molecules/ProviderCard.astro';
 import ProviderCTA from '../../components/organisms/ProviderCTA.astro';
+import FAQ from '../../components/molecules/FAQ.astro';
 import Button from '../../components/atoms/Button.astro';
 import { TRADES, getTradeBySlug } from '../../lib/trades';
 import { getProvidersByTrade } from '../../lib/providers';
@@ -70,7 +71,10 @@ const providers = getProvidersByTrade(trade.name);
       )}
     </section>
 
+    <!-- FAQ -->
+    <FAQ tradeName={trade.name} />
+
     <!-- Tradesperson CTA -->
-    <ProviderCTA />
+    <ProviderCTA tradeName={trade.name} />
   </div>
 </BaseLayout>

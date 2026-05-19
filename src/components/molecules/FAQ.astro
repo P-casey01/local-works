@@ -1,0 +1,50 @@
+---
+interface Props {
+  tradeName: string;
+}
+
+const { tradeName } = Astro.props;
+
+const defaultFaqs: Record<string, { q: string; a: string }[]> = {
+  default: [
+    { q: `How do I find a ${tradeName} on ServiceMatch?`, a: `Use our chatbot to describe your job — trade, location, and urgency. We'll match you with verified local ${tradeName}s in your area.` },
+    { q: `Are ServiceMatch ${tradeName}s verified?`, a: 'Yes. We check qualifications, insurance, and references. Look for the Verified badge on profiles.' },
+    { q: `How much does a ${tradeName} cost in Northern Ireland?`, a: `Costs vary by job. We recommend getting quotes from 2-3 matched ${tradeName}s through ServiceMatch to find the best value.` },
+    { q: `What if I'm not satisfied with the ${tradeName}?`, a: 'Leave an honest review and contact us if there are serious issues. We take quality standards seriously.' },
+  ],
+};
+
+const faqs = defaultFaqs[tradeName] || defaultFaqs.default;
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.a,
+    },
+  })),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section>
+  <h2 class="text-h3 text-[var(--color-text-primary)] mb-3">Frequently Asked Questions</h2>
+  <div class="space-y-3">
+    {faqs.map(faq => (
+      <details class="bg-[var(--color-surface)] rounded-lg shadow-[var(--shadow-sm)] group">
+        <summary class="flex items-center justify-between p-4 cursor-pointer text-[15px] font-semibold text-[var(--color-text-primary)] hover:text-[var(--color-primary)] transition-colors list-none">
+          <span>{faq.q}</span>
+          <span class="material-symbols-rounded text-[20px] text-[var(--color-text-muted)] group-open:rotate-180 transition-transform" aria-hidden="true">expand_more</span>
+        </summary>
+        <div class="px-4 pb-4 text-[15px] text-[var(--color-text-secondary)] leading-relaxed">
+          {faq.a}
+        </div>
+      </details>
+    ))}
+  </div>
+</section>

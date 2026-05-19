@@ -17,6 +17,7 @@ const { provider } = Astro.props;
 const tradeInfo = getTradeInfo(provider.trade);
 const tradeColor = tradeInfo?.color || 'var(--color-primary)';
 const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
+const cleanPhone = provider.phone.replace(/\s/g, '');
 ---
 
 <BaseLayout
@@ -78,11 +79,11 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
     <!-- Skills -->
     <div class="bg-[var(--color-surface)] rounded-lg p-4 shadow-[var(--shadow-sm)]">
       <h2 class="text-h4 text-[var(--color-text-primary)] mb-2">Skills & Services</h2>
-      <div class="flex flex-wrap gap-1.5">
+      <ul aria-label="Skills" class="flex flex-wrap gap-1.5 list-none p-0 m-0">
         {provider.skills.map(skill => (
-          <span class="bg-[var(--color-info-light)] rounded-pill px-3 py-1 text-[13px] text-[var(--color-primary)] font-semibold">{skill}</span>
+          <li class="bg-[var(--color-info-light)] rounded-pill px-3 py-1 text-[13px] text-[var(--color-primary)] font-semibold">{skill}</li>
         ))}
-      </div>
+      </ul>
     </div>
 
     <!-- About -->
@@ -93,7 +94,7 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
 
     <!-- Contact -->
     <div class="flex flex-col md:flex-row gap-3 mt-4">
-      <a href={`tel:${provider.phone}`} class="flex-1 bg-[var(--color-primary)] rounded-button py-3.5 text-center shadow-[var(--shadow-primary)] hover:opacity-90 transition-opacity" aria-label={`Call ${provider.name}`}>
+      <a href={`tel:${cleanPhone}`} class="flex-1 bg-[var(--color-primary)] rounded-button py-3.5 text-center shadow-[var(--shadow-primary)] hover:opacity-90 transition-opacity" aria-label={`Call ${provider.name}`}>
         <span class="text-body-bold text-[var(--color-text-inverse)]">📞  Call Now</span>
       </a>
       <a href={`mailto:${provider.email}`} class="flex-1 bg-[var(--color-surface)] rounded-button py-3.5 text-center border-1.5 border-[var(--color-primary)] hover:bg-[var(--color-info-light)] transition-colors" aria-label={`Email ${provider.name}`}>
@@ -105,6 +106,14 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
     <p class="text-[13px] text-[var(--color-text-muted)] text-center leading-snug mt-2">
       Always verify credentials and qualifications before hiring. ServiceMatch connects you — you choose.
     </p>
+
+    <!-- Browse more tradespeople -->
+    <div class="bg-[var(--color-info-light)] rounded-lg p-4 text-center mt-4">
+      <p class="text-body text-[var(--color-text-secondary)] mb-2">Looking for more {provider.trade}s in {provider.location}?</p>
+      <a href={`/trades/${tradeInfo?.slug || ''}`} class="text-body-bold text-[var(--color-primary)] hover:opacity-80 transition-opacity">
+        Browse all {provider.trade}s →
+      </a>
+    </div>
 
     <!-- JSON-LD: LocalBusiness -->
     <script type="application/ld+json" set:html={JSON.stringify({
@@ -118,7 +127,7 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
         "addressRegion": "Northern Ireland",
         "addressCountry": "GB"
       },
-      "telephone": provider.phone,
+      "telephone": cleanPhone,
       "email": provider.email,
       "priceRange": `£${provider.hourlyRate}/hr`,
       "aggregateRating": {
@@ -126,7 +135,6 @@ const tradeIcon = tradeInfo?.icon || 'account-hard-hat';
         "ratingValue": provider.rating,
         "reviewCount": provider.reviewCount
       },
-      ...(provider.verified ? {} : {})
     })} />
   </div>
 </BaseLayout>
