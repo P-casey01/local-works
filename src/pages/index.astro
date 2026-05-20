@@ -29,11 +29,12 @@ import FinalCTA from '../components/organisms/FinalCTA.astro';
   <!-- Popular Trades -->
   <section class="section">
     <div class="container">
-      <div class="flex justify-between items-center mb-6">
-        <h2 class="text-section-heading text-[var(--color-text-primary)]">Browse Trades</h2>
-        <a href="/chat" class="text-[13px] font-semibold text-[var(--color-accent)] hover:opacity-80">See all →</a>
+      <div class="flex justify-between items-end mb-2">
+        <h2 class="text-section-heading text-[var(--color-text-primary)]">Find the Right Trade for Your Job</h2>
+        <a href="/chat" class="text-[13px] font-semibold text-[var(--color-accent)] hover:opacity-80 whitespace-nowrap">View all trades →</a>
       </div>
-      <TradeGrid limit={12} />
+      <p class="text-[14px] text-[var(--color-text-tertiary)] mb-6">Browse verified local trades across common home services.</p>
+      <TradeGrid />
     </div>
   </section>
 

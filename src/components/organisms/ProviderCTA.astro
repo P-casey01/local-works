@@ -1,30 +1,132 @@
 ---
-const benefits = [
-  { icon: 'campaign', title: 'Reach local customers', desc: 'Get matched with homeowners who need your trade in your area.' },
-  { icon: 'trending_up', title: 'Build your reputation', desc: 'Verified reviews and job history help customers choose you with confidence.' },
-  { icon: 'handshake', title: 'Transparent process', desc: 'Clear job details, fair quoting, and direct communication — no hidden fees.' },
+const trustPoints = [
+  'Free to join',
+  'Verified profiles',
+  'Local job matches',
 ];
 ---
 
-<section class="bg-[var(--color-surface-variant)] section">
+<section class="provider-cta">
   <div class="container">
-    <div class="text-center mb-8 md:mb-10">
-      <h2 class="text-section-heading text-[var(--color-text-primary)] mb-3">For Tradespeople</h2>
-      <p class="text-[var(--color-text-tertiary)] text-body-lg max-w-lg mx-auto">Grow your business with verified local leads and a profile customers trust.</p>
-    </div>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      {benefits.map(b => (
-        <div class="card text-center">
-          <div class="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center bg-[#ECFDF5]">
-            <span class="material-symbols-rounded text-[24px] text-[#059669]" aria-hidden="true">{b.icon}</span>
-          </div>
-          <p class="text-card-heading text-[var(--color-text-primary)] mb-2">{b.title}</p>
-          <p class="text-[14px] text-[var(--color-text-tertiary)] leading-relaxed">{b.desc}</p>
+    <div class="cta-layout">
+      <div class="cta-left">
+        <span class="material-symbols-rounded cta-icon" aria-hidden="true">handshake</span>
+        <h2 class="cta-heading">Are you a tradesperson?</h2>
+        <p class="cta-subheading">Get found by local customers looking for your trade.</p>
+        <p class="cta-body">Create a free profile, list your services, and receive matched job requests in your area.</p>
+      </div>
+      <div class="cta-right">
+        <a href="/signup" class="btn-primary">Create Your Free Profile →</a>
+        <div class="trust-chips">
+          {trustPoints.map(point => (
+            <span class="trust-chip">
+              <span class="material-symbols-rounded check-icon" aria-hidden="true">check_circle</span>
+              {point}
+            </span>
+          ))}
         </div>
-      ))}
-    </div>
-    <div class="text-center mt-10">
-      <a href="/signup" class="btn-primary">Join as a Provider</a>
+      </div>
     </div>
   </div>
 </section>
+
+<style>
+  .provider-cta {
+    padding-top: var(--space-section-mobile);
+    padding-bottom: var(--space-section-mobile);
+    background: var(--color-surface-variant);
+  }
+  @media (min-width: 768px) {
+    .provider-cta {
+      padding-top: var(--space-section);
+      padding-bottom: var(--space-section);
+    }
+  }
+
+  .cta-layout {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 32px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  @media (min-width: 768px) {
+    .cta-layout {
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 44px 48px;
+      gap: 40px;
+    }
+  }
+
+  .cta-left {
+    max-width: 520px;
+  }
+
+  .cta-icon {
+    font-size: 28px;
+    color: var(--color-accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .cta-heading {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+
+  .cta-subheading {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+
+  .cta-body {
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-text-tertiary);
+    line-height: 1.5;
+  }
+
+  .cta-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+  @media (min-width: 768px) {
+    .cta-right {
+      align-items: center;
+      padding-top: 8px;
+    }
+  }
+
+  .trust-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .trust-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-tertiary);
+  }
+
+  .check-icon {
+    font-size: 15px;
+    color: var(--color-success);
+  }
+</style>
