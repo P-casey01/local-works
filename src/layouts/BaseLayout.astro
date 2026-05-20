@@ -1,0 +1,134 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description = 'Find reliable local tradespeople in Northern Ireland. Post the job, compare verified providers, and book with confidence.',
+  ogImage = '/og/home.png',
+  canonicalUrl,
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'Local Works';
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const siteUrl = Astro.site?.origin || 'https://localworks.co.uk';
+const canonical = canonicalUrl || new URL(Astro.url.pathname, siteUrl).href;
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta -->
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonical} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Font preload -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <!-- JSON-LD: Organization -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": siteName,
+      "url": siteUrl,
+      "description": "Connecting Northern Ireland with trusted local tradespeople.",
+      "areaServed": {
+        "@type": "Place",
+        "name": "Northern Ireland"
+      }
+    })} />
+  </head>
+  <body class="min-h-screen bg-[var(--color-background)] text-[var(--color-text-primary)]">
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header role="banner" class="bg-[var(--color-primary)] text-[var(--color-text-inverse)]">
+      <div class="container flex items-center justify-between py-3.5">
+        <a href="/" class="text-lg font-bold tracking-tight hover:opacity-90" aria-label="Local Works Home">
+          Local Works
+        </a>
+        <nav aria-label="Main navigation" class="flex items-center gap-5 text-sm font-semibold">
+          <a href="/chat" class="hover:opacity-90 hidden sm:inline">Find a Tradesperson</a>
+          <a href="/signup" class="bg-white/15 hover:bg-white/25 rounded-md px-3.5 py-1.5 transition-colors">Join as a Pro</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer role="contentinfo" class="border-t border-[var(--color-border)] bg-[var(--color-surface)]">
+      <div class="container" style="padding-top: var(--space-section-mobile); padding-bottom: var(--space-section-mobile);">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+          <div class="md:col-span-1">
+            <p class="text-lg font-bold text-[var(--color-text-primary)] mb-2">Local Works</p>
+            <p class="text-[14px] text-[var(--color-text-tertiary)] leading-relaxed mb-3">Find reliable local tradespeople in Northern Ireland. Post the job, compare verified providers, and book with confidence.</p>
+            <a href="mailto:hello@localworks.co.uk" class="text-[14px] text-[var(--color-accent)] hover:underline">hello@localworks.co.uk</a>
+          </div>
+          <div>
+            <p class="text-[13px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">For Customers</p>
+            <ul class="space-y-2 text-[14px]">
+              <li><a href="/chat" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Post a Job</a></li>
+              <li><a href="/chat" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Find a Tradesperson</a></li>
+              <li><a href="/trades/plumber" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Browse Trades</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[13px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">For Tradespeople</p>
+            <ul class="space-y-2 text-[14px]">
+              <li><a href="/signup" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Join as a Provider</a></li>
+              <li><a href="/signup" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Create Your Profile</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[13px] font-semibold text-[var(--color-text-muted)] uppercase tracking-wider mb-3">Legal</p>
+            <ul class="space-y-2 text-[14px]">
+              <li><a href="/terms" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Terms of Use</a></li>
+              <li><a href="/privacy" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Privacy Policy</a></li>
+              <li><a href="/provider-agreement" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Provider Agreement</a></li>
+              <li><a href="/verification" class="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors">Insurance & Verification Policy</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="border-t border-[var(--color-border)] mt-10 pt-6 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+          <p class="text-[var(--color-text-muted)] text-[13px]">&copy; {new Date().getFullYear()} Local Works. All rights reserved.</p>
+          <p class="text-[var(--color-text-muted)] text-[12px] leading-relaxed max-w-md">Local Works connects homeowners with tradespeople. We verify profiles but do not guarantee workmanship. Always check references and insurance details before hiring.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

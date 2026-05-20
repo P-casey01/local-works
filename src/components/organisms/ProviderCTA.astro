@@ -1,0 +1,30 @@
+---
+const benefits = [
+  { icon: 'campaign', title: 'Reach local customers', desc: 'Get matched with homeowners who need your trade in your area.' },
+  { icon: 'trending_up', title: 'Build your reputation', desc: 'Verified reviews and job history help customers choose you with confidence.' },
+  { icon: 'handshake', title: 'Transparent process', desc: 'Clear job details, fair quoting, and direct communication — no hidden fees.' },
+];
+---
+
+<section class="bg-[var(--color-surface-variant)] section">
+  <div class="container">
+    <div class="text-center mb-8 md:mb-10">
+      <h2 class="text-section-heading text-[var(--color-text-primary)] mb-3">For Tradespeople</h2>
+      <p class="text-[var(--color-text-tertiary)] text-body-lg max-w-lg mx-auto">Grow your business with verified local leads and a profile customers trust.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {benefits.map(b => (
+        <div class="card text-center">
+          <div class="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center bg-[#ECFDF5]">
+            <span class="material-symbols-rounded text-[24px] text-[#059669]" aria-hidden="true">{b.icon}</span>
+          </div>
+          <p class="text-card-heading text-[var(--color-text-primary)] mb-2">{b.title}</p>
+          <p class="text-[14px] text-[var(--color-text-tertiary)] leading-relaxed">{b.desc}</p>
+        </div>
+      ))}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/signup" class="btn-primary">Join as a Provider</a>
+    </div>
+  </div>
+</section>

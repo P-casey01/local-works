@@ -1,0 +1,27 @@
+---
+---
+
+<section class="bg-[var(--color-surface-variant)] section">
+  <div class="container">
+    <div class="text-center mb-8 md:mb-10">
+      <h2 class="text-section-heading text-[var(--color-text-primary)] mb-3">How It Works</h2>
+      <p class="text-[var(--color-text-tertiary)] text-body-lg max-w-lg mx-auto">Getting your job done is straightforward — no chasing, no guesswork.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {[
+        { icon: 'edit_note', num: '1', title: 'Post the job', desc: 'Tell us what you need, where you are, and when you need it.' },
+        { icon: 'group', num: '2', title: 'Compare providers', desc: 'View verified tradespeople, ratings, and responses.' },
+        { icon: 'check_circle', num: '3', title: 'Book with confidence', desc: 'Keep job details, messages, and updates in one place.' },
+      ].map(step => (
+        <div class="card text-center">
+          <div class="w-12 h-12 rounded-full mx-auto mb-4 flex items-center justify-center bg-[var(--color-accent)]/[0.08]">
+            <span class="material-symbols-rounded text-[24px] text-[var(--color-accent)]" aria-hidden="true">{step.icon}</span>
+          </div>
+          <p class="text-[12px] font-semibold text-[var(--color-accent)] mb-1.5">Step {step.num}</p>
+          <p class="text-card-heading text-[var(--color-text-primary)] mb-2">{step.title}</p>
+          <p class="text-[14px] text-[var(--color-text-tertiary)] leading-relaxed">{step.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

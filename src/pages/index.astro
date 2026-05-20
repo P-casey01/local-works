@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HeroSection from '../components/organisms/HeroSection.astro';
+import HowItWorks from '../components/molecules/HowItWorks.astro';
+import TrustSection from '../components/organisms/TrustSection.astro';
+import TradeGrid from '../components/molecules/TradeGrid.astro';
+import ProviderCTA from '../components/organisms/ProviderCTA.astro';
+import FinalCTA from '../components/organisms/FinalCTA.astro';
+---
+
+<BaseLayout
+  title="Find Trusted Local Pros in Northern Ireland"
+  description="Find reliable local tradespeople in Northern Ireland. Post the job, compare verified providers, and book with confidence."
+>
+  <!-- Hero -->
+  <HeroSection />
+
+  <!-- Problem Statement -->
+  <section class="section">
+    <div class="container text-center max-w-2xl mx-auto">
+      <h2 class="text-section-heading text-[var(--color-text-primary)] mb-3">Tired of chasing quotes and not knowing who to trust?</h2>
+      <p class="text-[var(--color-text-tertiary)] text-body-lg">Finding a reliable tradesperson shouldn't mean ringing around, waiting for callbacks, or gambling on reputation. Local Works puts verification, reviews, and clear communication at the centre.</p>
+    </div>
+  </section>
+
+  <!-- How It Works -->
+  <HowItWorks />
+
+  <!-- Popular Trades -->
+  <section class="section">
+    <div class="container">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-section-heading text-[var(--color-text-primary)]">Browse Trades</h2>
+        <a href="/chat" class="text-[13px] font-semibold text-[var(--color-accent)] hover:opacity-80">See all →</a>
+      </div>
+      <TradeGrid limit={12} />
+    </div>
+  </section>
+
+  <!-- Trust & Safety -->
+  <TrustSection />
+
+  <!-- Provider Benefits -->
+  <ProviderCTA />
+
+  <!-- Final CTA -->
+  <FinalCTA />
+</BaseLayout>

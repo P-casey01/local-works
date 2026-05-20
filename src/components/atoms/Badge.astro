@@ -1,0 +1,23 @@
+---
+interface Props {
+  variant?: 'default' | 'success' | 'warning' | 'info' | 'danger';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+
+const variants: Record<string, string> = {
+  default: 'bg-[var(--color-surface-variant)] text-[var(--color-text-tertiary)]',
+  success: 'bg-[var(--color-success-light)] text-[var(--color-success)]',
+  warning: 'bg-[var(--color-warning-light)] text-[var(--color-warning)]',
+  info: 'bg-[var(--color-info-light)] text-[var(--color-primary)]',
+  danger: 'bg-[var(--color-danger-light)] text-[var(--color-danger)]',
+};
+---
+
+<span class={`inline-flex items-center rounded-pill px-3 py-0.5 text-[11px] font-bold tracking-wider uppercase leading-none ${variants[variant]} ${className}`}>
+  <slot />
+</span>

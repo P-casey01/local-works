@@ -1,0 +1,27 @@
+---
+import { TRADES } from '../../lib/trades';
+
+interface Props {
+  limit?: number;
+  class?: string;
+}
+
+const { limit, class: className = '' } = Astro.props;
+const displayTrades = limit ? TRADES.slice(0, limit) : TRADES;
+---
+
+<div class={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 md:gap-3 ${className}`}>
+  {displayTrades.map(trade => {
+    const article = 'AEIOUaeiou'.includes(trade.name[0]) ? 'an' : 'a';
+    return (
+    <a href={`/chat?trade=${trade.slug}`} class="block group" aria-label={`Find ${article} ${trade.name}`}>
+      <div class="bg-[var(--color-surface)] rounded-md py-3 px-1 text-center shadow-[var(--shadow-sm)] hover:shadow-[var(--shadow-md)] transition-shadow">
+        <div class="w-12 h-12 rounded-full mx-auto mb-1 flex items-center justify-center" style={`background: color-mix(in srgb, ${trade.color} 9%, transparent)`}>
+          <span class="material-symbols-rounded text-[28px]" style={`color: ${trade.color}`} aria-hidden="true">{trade.icon}</span>
+        </div>
+        <p class="text-[13px] font-semibold text-[var(--color-text-secondary)] leading-tight">{trade.name}</p>
+      </div>
+    </a>
+    );
+  })}
+</div>
